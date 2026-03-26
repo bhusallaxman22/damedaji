@@ -1,0 +1,27 @@
+{
+    "name": "dame-daji",
+    "version": "1.0.0",
+    "type": "module",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "db:init": "node scripts/init-db.mjs",
+        "scholar:sync": "node scripts/sync-scholar.mjs"
+    },
+    "dependencies": {
+        "@ant-design/icons": "^6.1.1",
+        "antd": "^6.3.4",
+        "axios": "^1.13.6",
+        "cheerio": "^1.0.0-rc.12",
+        "dotenv": "^17.3.1",
+        "framer-motion": "^12.38.0",
+        "mariadb": "^3.4.5",
+        "next": "^16.2.1",
+        "react": "^19.2.4",
+        "react-dom": "^19.2.4",
+        "zod": "^4.3.6"
+    }
+}

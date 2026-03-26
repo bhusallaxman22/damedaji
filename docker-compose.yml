@@ -1,0 +1,44 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: dame-daji-app
+    restart: unless-stopped
+    depends_on:
+      mariadb:
+        condition: service_healthy
+    env_file:
+      - .env
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      HOSTNAME: 0.0.0.0
+      MARIADB_HOST: mariadb
+      MARIADB_PORT: 3306
+      MARIADB_USER: ${MARIADB_USER:-root}
+      MARIADB_PASSWORD: ${MARIADB_PASSWORD:-change_me}
+      MARIADB_DATABASE: ${MARIADB_DATABASE:-research_portfolio}
+      SCHOLAR_USER_ID: ${SCHOLAR_USER_ID:-o_zl-E8AAAAJ}
+      ADMIN_SYNC_TOKEN: ${ADMIN_SYNC_TOKEN:-change_me}
+    ports:
+      - "3000:3000"
+
+  mariadb:
+    image: mariadb:11.4
+    container_name: dame-daji-db
+    restart: unless-stopped
+    environment:
+      MARIADB_ROOT_PASSWORD: ${MARIADB_PASSWORD:-change_me}
+      MARIADB_DATABASE: ${MARIADB_DATABASE:-research_portfolio}
+    volumes:
+      - mariadb-data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD-SHELL", "mariadb-admin ping -h 127.0.0.1 -uroot -p$$MARIADB_ROOT_PASSWORD --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 20s
+
+volumes:
+  mariadb-data:
