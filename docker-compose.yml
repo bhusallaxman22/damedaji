@@ -12,7 +12,7 @@ services:
       - .env
     environment:
       NODE_ENV: production
-      PORT: 3000
+      PORT: 3068
       HOSTNAME: 0.0.0.0
       MARIADB_HOST: mariadb
       MARIADB_PORT: 3306
@@ -22,7 +22,7 @@ services:
       SCHOLAR_USER_ID: ${SCHOLAR_USER_ID:-o_zl-E8AAAAJ}
       ADMIN_SYNC_TOKEN: ${ADMIN_SYNC_TOKEN:-change_me}
     ports:
-      - "3000:3000"
+      - "3068:3068"
 
   mariadb:
     image: mariadb:11.4
